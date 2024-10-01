@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>disable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Resources\feladat_adat_20200617.xlsx" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Resources\feladat_adat_20200617.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="EPPlus" Version="7.3.2" />
+    <PackageReference Include="LinqKit.Core" Version="1.2.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DataEdge_CustomerService.Persistence\DataEdge_CustomerService.Persistence.csproj" />
+  </ItemGroup>
+
+</Project>
