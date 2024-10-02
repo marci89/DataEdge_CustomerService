@@ -5,10 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataEdge_CustomerService.Business.Models
+namespace DataEdge_CustomerService.Business.Models.Response.Purchase
 {
-    public  class ListShopResponse : ResponseBase
+    public class CreatePurchaseResponse : ResponseBase
     {
-        public List<ShopModel> Result { get; set; }
+        public PurchaseModel Result { get; set; }
     }
 }

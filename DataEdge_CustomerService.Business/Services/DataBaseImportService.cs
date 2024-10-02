@@ -1,4 +1,5 @@
-﻿using DataEdge_CustomerService.Persistence;
+﻿using DataEdge_CustomerService.Business.Services.Interfaces;
+using DataEdge_CustomerService.Persistence;
 using DataEdge_CustomerService.Persistence.Entities;
 using OfficeOpenXml;
 using System;
@@ -14,7 +15,7 @@ namespace DataEdge_CustomerService.Business.Services
 {
 
 
-    public class DataBaseImportService
+    public class DataBaseImportService : IDataBaseImportService
     {
         private readonly DataContext _dbContext;
         private HashSet<int> NonexistingPurchaseIds = new HashSet<int>();

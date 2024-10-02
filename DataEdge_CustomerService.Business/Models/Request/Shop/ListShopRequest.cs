@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataEdge_CustomerService.Business.Models.Request
+namespace DataEdge_CustomerService.Business.Models.Request.Shop
 {
     public class ListShopRequest
     {

@@ -1,21 +1,18 @@
-﻿using DataEdge_CustomerService.Business.Models;
+﻿using DataEdge_CustomerService.Business.Models.Request.Item;
 using DataEdge_CustomerService.Business.Models.Request.Shop;
 using DataEdge_CustomerService.Business.Services;
-using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
-using System.ComponentModel;
 
 namespace DataEdgeCustomerService.API.Controllers
 {
 
     [ApiController]
     [Route("[controller]")]
-    public class ShopController : Controller
+    public class ItemController : Controller
     {
-        private readonly ShopService _service;
+        private readonly ItemService _service;
 
-        public ShopController(ShopService service)
+        public ItemController(ItemService service)
         {
             _service = service;
         }
@@ -39,7 +36,7 @@ namespace DataEdgeCustomerService.API.Controllers
         /// List
         /// </summary>
         [HttpGet("List")]
-        public async Task<IActionResult> List([FromQuery] ListShopRequest request)
+        public async Task<IActionResult> List([FromQuery] ListItemRequest request)
         {
 
             var response = await _service.List(request);
@@ -56,7 +53,7 @@ namespace DataEdgeCustomerService.API.Controllers
         /// Create
         /// </summary>
         [HttpPost("Create")]
-        public async Task<IActionResult> Create([FromBody] CreateShopRequest request)
+        public async Task<IActionResult> Create([FromBody] CreateItemRequest request)
         {
 
             var response = await _service.Create(request);
@@ -72,7 +69,7 @@ namespace DataEdgeCustomerService.API.Controllers
         /// Update
         /// </summary>
         [HttpPut("Update")]
-        public async Task<IActionResult> Update([FromBody] UpdateShopRequest request)
+        public async Task<IActionResult> Update([FromBody] UpdateItemRequest request)
         {
             var response = await _service.Update(request);
 
@@ -87,4 +84,3 @@ namespace DataEdgeCustomerService.API.Controllers
 
 }
 
-   

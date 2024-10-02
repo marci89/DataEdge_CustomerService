@@ -6,11 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataEdge_CustomerService.Business.Models.Response
+namespace DataEdge_CustomerService.Business.Models.Response.Item
 {
-
-    public class CreateShopResponse : ResponseBase
+    public class UpdateItemResponse : CreateItemResponse
     {
-        public ShopModel Result { get; set; }
     }
 }

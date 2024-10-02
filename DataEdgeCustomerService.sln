@@ -5,9 +5,9 @@ VisualStudioVersion = 17.8.34316.72
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataEdgeCustomerService.API", "DataEdgeCustomerService.API\DataEdgeCustomerService.API.csproj", "{02C81F00-E52F-4B7A-A013-BDD1177E9AF0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataEdge_CustomerService.Business", "DataEdge_CustomerService.Business\DataEdge_CustomerService.Business.csproj", "{CD991A44-4FE3-4B51-8CF9-0536BEF56718}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataEdge_CustomerService.Business", "DataEdge_CustomerService.Business\DataEdge_CustomerService.Business.csproj", "{CD991A44-4FE3-4B51-8CF9-0536BEF56718}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataEdge_CustomerService.Persistence", "DataEdge_CustomerService.Persistence\DataEdge_CustomerService.Persistence.csproj", "{65463E1A-C218-4A80-A1FA-5759BD63EFD6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataEdge_CustomerService.Persistence", "DataEdge_CustomerService.Persistence\DataEdge_CustomerService.Persistence.csproj", "{65463E1A-C218-4A80-A1FA-5759BD63EFD6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

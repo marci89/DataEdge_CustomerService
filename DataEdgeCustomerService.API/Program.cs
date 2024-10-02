@@ -1,4 +1,5 @@
 using DataEdge_CustomerService.Business.Services;
+using DataEdge_CustomerService.Business.Services.Interfaces;
 using DataEdge_CustomerService.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
@@ -14,8 +15,11 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddScoped<DataBaseImportService>();
+builder.Services.AddScoped< IDataBaseImportService, DataBaseImportService >();
 builder.Services.AddScoped<ShopService>();
+builder.Services.AddScoped<ItemService>();
+builder.Services.AddScoped<PurchaseService>();
+builder.Services.AddScoped<PurchaseItemService>();
 
 builder.Services.AddDbContext<DataContext>(options =>
 {

@@ -1,7 +1,7 @@
-﻿using DataEdge_CustomerService.Business.Models;
-using DataEdge_CustomerService.Business.Models.DTO;
-using DataEdge_CustomerService.Business.Models.Request;
-using DataEdge_CustomerService.Business.Models.Response;
+﻿using DataEdge_CustomerService.Business.Models.DTO;
+using DataEdge_CustomerService.Business.Models.Request.Shop;
+using DataEdge_CustomerService.Business.Models.Response.Shop;
+using DataEdge_CustomerService.Business.Services.Interfaces;
 using DataEdge_CustomerService.Persistence;
 using DataEdge_CustomerService.Persistence.Entities;
 using Microsoft.EntityFrameworkCore;
@@ -16,7 +16,7 @@ namespace DataEdge_CustomerService.Business.Services
 {
 
 
-    public class ShopService
+    public class ShopService : IShopService
     {
         private readonly DataContext _dbContext;
 
@@ -27,9 +27,43 @@ namespace DataEdge_CustomerService.Business.Services
 
 
         /// <summary>
-        /// List shops
+        /// Read by id
         /// </summary>
-        public async Task<ListShopResponse> ListShop(ListShopRequest request)
+        public async Task<ReadShopByIdResponse> ReadById(int id)
+        {
+            try
+            {
+                var entity = await _dbContext.Shops.FindAsync(id);
+
+                if (entity is null)
+                {
+                    return new ReadShopByIdResponse
+                    {
+                        ErrorMessage = "A keresett elem nem található!"
+                    };
+                } else
+                {
+                    return new ReadShopByIdResponse
+                    {
+                        Result = new ShopModel { Id = entity.Id, Name = entity.Name, PartnerId = entity.PartnerID }
+                    };
+                }
+
+             
+            }
+            catch (Exception ex)
+            {
+                return new ReadShopByIdResponse
+                {
+                    ErrorMessage = ex.Message
+                };
+            }
+        }
+
+        /// <summary>
+        /// List
+        /// </summary>
+        public async Task<ListShopResponse> List(ListShopRequest request)
         {
             try
             {
@@ -37,18 +71,18 @@ namespace DataEdge_CustomerService.Business.Services
 
                 if (request.Id.HasValue && request.Id.Value != 0)
                 {
-                    query = query.Where(shop => shop.Id.ToString().Contains(request.Id.Value.ToString()));
+                    query = query.Where(x => x.Id.ToString().Contains(request.Id.Value.ToString()));
                 }
 
                 if (!string.IsNullOrWhiteSpace(request.Name))
                 {
-                    query = query.Where(shop => shop.Name.ToLower().Contains(request.Name.ToLower()));
+                    query = query.Where(x => x.Name.ToLower().Contains(request.Name.ToLower()));
                 }
 
                 if (request.PartnerID.HasValue && request.Id.Value != 0)
                 {
                    // query = query.Where(shop => shop.PartnerID == request.PartnerID.Value);
-                    query = query.Where(shop => shop.PartnerID.ToString().Contains(request.PartnerID.Value.ToString()));
+                    query = query.Where(x => x.PartnerID.ToString().Contains(request.PartnerID.Value.ToString()));
                 }
 
                 var entities = await query.ToListAsync();
@@ -69,7 +103,7 @@ namespace DataEdge_CustomerService.Business.Services
         }
 
         /// <summary>
-        /// Create shop
+        /// Create
         /// </summary>
         public async Task<CreateShopResponse> Create(CreateShopRequest request)
         {
@@ -88,7 +122,7 @@ namespace DataEdge_CustomerService.Business.Services
 
 
 
-                if (!String.IsNullOrEmpty(response.ErrorMessage))
+                if (String.IsNullOrEmpty(response.ErrorMessage))
                 {
                     var entity = new Shop { Name = request.Name, PartnerID = request.PartnerID ?? 0 };
                     await _dbContext.Shops.AddAsync(entity);
@@ -104,5 +138,47 @@ namespace DataEdge_CustomerService.Business.Services
                 return response;
             }
         }
+
+        /// <summary>
+        /// Update 
+        /// </summary>
+        public async Task<UpdateShopResponse> Update(UpdateShopRequest request)
+        {
+
+            var response = new UpdateShopResponse();
+
+            try
+            {
+                if (request is null)
+                    response.ErrorMessage = "Hibás kérés objektum!";
+
+                if (String.IsNullOrWhiteSpace(request.Name))
+                    response.ErrorMessage = "Név megadása kötelező!";
+
+                if (request.PartnerID is null)
+                    response.ErrorMessage = "Partner azonosító megadása kötelező!";
+
+
+
+                if (String.IsNullOrEmpty(response.ErrorMessage))
+                {
+                    var entity = await _dbContext.Shops.FindAsync(request.Id);
+                    entity.Name = request.Name;
+                    entity.PartnerID = request.PartnerID ?? 0;
+                    _dbContext.Shops.Update(entity);
+                    await _dbContext.SaveChangesAsync();
+                    response.Result = new ShopModel { Id = entity.Id, Name = entity.Name, PartnerId = entity.PartnerID };
+                }
+
+                return response;
+            }
+            catch (Exception ex)
+            {
+                response.ErrorMessage = ex.Message;
+                return response;
+            }
+
+        }
+
     }
 }
