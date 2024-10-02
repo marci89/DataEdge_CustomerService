@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace DataEdge_CustomerService.Persistence.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20240927151740_InitialCreate")]
+    [Migration("20241002200057_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -112,7 +112,7 @@ namespace DataEdge_CustomerService.Persistence.Migrations
                     b.Property<int>("PartnerID")
                         .HasColumnType("integer");
 
-                    b.Property<int?>("PurchaseID")
+                    b.Property<int>("PurchaseID")
                         .HasColumnType("integer");
 
                     b.Property<float>("Quantity")
@@ -120,8 +120,7 @@ namespace DataEdge_CustomerService.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PartnerCtID")
-                        .IsUnique();
+                    b.HasIndex("PartnerCtID");
 
                     b.HasIndex("PurchaseID");
 
@@ -164,8 +163,8 @@ namespace DataEdge_CustomerService.Persistence.Migrations
             modelBuilder.Entity("DataEdge_CustomerService.Persistence.Entities.PurchaseItem", b =>
                 {
                     b.HasOne("DataEdge_CustomerService.Persistence.Entities.Item", "Item")
-                        .WithOne("PurchaseItem")
-                        .HasForeignKey("DataEdge_CustomerService.Persistence.Entities.PurchaseItem", "PartnerCtID")
+                        .WithMany("PurchaseItems")
+                        .HasForeignKey("PartnerCtID")
                         .OnDelete(DeleteBehavior.NoAction)
                         .HasConstraintName("FK_Item_ItemID");
 
@@ -173,6 +172,7 @@ namespace DataEdge_CustomerService.Persistence.Migrations
                         .WithMany("PurchaseItems")
                         .HasForeignKey("PurchaseID")
                         .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired()
                         .HasConstraintName("FK_Purchase_PurchaseID");
 
                     b.Navigation("Item");
@@ -182,7 +182,7 @@ namespace DataEdge_CustomerService.Persistence.Migrations
 
             modelBuilder.Entity("DataEdge_CustomerService.Persistence.Entities.Item", b =>
                 {
-                    b.Navigation("PurchaseItem");
+                    b.Navigation("PurchaseItems");
                 });
 
             modelBuilder.Entity("DataEdge_CustomerService.Persistence.Entities.Purchase", b =>

@@ -15,7 +15,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddScoped< IDataBaseImportService, DataBaseImportService >();
+builder.Services.AddScoped<DataBaseImportService >();
 builder.Services.AddScoped<ShopService>();
 builder.Services.AddScoped<ItemService>();
 builder.Services.AddScoped<PurchaseService>();

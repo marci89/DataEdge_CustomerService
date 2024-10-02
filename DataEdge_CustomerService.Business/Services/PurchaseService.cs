@@ -12,6 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DataEdge_CustomerService.Business.Models.Response.Purchase;
 using DataEdge_CustomerService.Business.Models.Request.Purchase;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace DataEdge_CustomerService.Business.Services
 {
@@ -81,20 +82,44 @@ public class PurchaseService : IPurchaseService
     {
         try
         {
-            IQueryable<Purchase> query = _dbContext.Purchases.Include(p => p.Shop);
+      
+
+            IQueryable <Purchase> query = _dbContext.Purchases.Include(p => p.Shop).Include(p => p.Shop);
 
             if (request.Id.HasValue && request.Id.Value != 0)
             {
                 query = query.Where(x => x.Id.ToString().Contains(request.Id.Value.ToString()));
             }
 
+            if (request.PurchaseAmount.HasValue && request.PurchaseAmount.Value != 0)
+            {
+                query = query.Where(x => x.PurchaseAmount.ToString().Contains(request.PurchaseAmount.Value.ToString()));
+            }
+
+            if (request.CashRegisterId.HasValue && request.CashRegisterId.Value != 0)
+            {
+                query = query.Where(x => x.CashRegisterId.ToString().Contains(request.CashRegisterId.Value.ToString()));
+            }
+
+            if (request.PartnerId.HasValue && request.PartnerId.Value != 0)
+            {
+                query = query.Where(x => x.PartnerId.ToString().Contains(request.PartnerId.Value.ToString()));
+            }
+
             if (request.Date != DateTime.MinValue)
             {
-                var utcDate = request.Date.ToUniversalTime();
-                query = query.Where(x => x.Date.Year == utcDate.Year &&
-                             x.Date.Month == utcDate.Month &&
-                             x.Date.Day == utcDate.Day);
+    
+                query = query.Where(x => x.Date.Year == request.Date.Year &&
+                             x.Date.Month == request.Date.Month &&
+                             x.Date.Day == request.Date.Day);
             }
+
+            if (!string.IsNullOrWhiteSpace(request.ShopName))
+            {
+                query = query.Where(x => x.Shop.Name.ToLower().Contains(request.ShopName.ToLower()));
+            }
+
+
 
             var entities = await query.ToListAsync();
 
@@ -103,7 +128,7 @@ public class PurchaseService : IPurchaseService
                 Result = entities.Select(x => new PurchaseModel
                 {
                     Id = x.Id,
-                    Date = x.Date,
+                    Date = x.Date.ToUniversalTime(),
                     PurchaseAmount = x.PurchaseAmount,
                     CashRegisterId = x.CashRegisterId,
                     PartnerId = x.PartnerId,

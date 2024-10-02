@@ -79,7 +79,7 @@ namespace DataEdge_CustomerService.Business.Services
                     query = query.Where(x => x.Name.ToLower().Contains(request.Name.ToLower()));
                 }
 
-                if (request.PartnerID.HasValue && request.Id.Value != 0)
+                if (request.PartnerID.HasValue && request.PartnerID.Value != 0)
                 {
                    // query = query.Where(shop => shop.PartnerID == request.PartnerID.Value);
                     query = query.Where(x => x.PartnerID.ToString().Contains(request.PartnerID.Value.ToString()));

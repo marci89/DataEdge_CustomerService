@@ -72,7 +72,7 @@ namespace DataEdge_CustomerService.Persistence.Migrations
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     PartnerCtID = table.Column<int>(type: "integer", nullable: true),
-                    PurchaseID = table.Column<int>(type: "integer", nullable: true),
+                    PurchaseID = table.Column<int>(type: "integer", nullable: false),
                     Quantity = table.Column<float>(type: "real", nullable: false),
                     Gross = table.Column<float>(type: "real", nullable: false),
                     PartnerID = table.Column<int>(type: "integer", nullable: false)
@@ -100,8 +100,7 @@ namespace DataEdge_CustomerService.Persistence.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_PurchaseItem_PartnerCtID",
                 table: "PurchaseItem",
-                column: "PartnerCtID",
-                unique: true);
+                column: "PartnerCtID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_PurchaseItem_PurchaseID",

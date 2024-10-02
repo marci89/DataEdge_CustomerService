@@ -46,11 +46,13 @@ public class PurchaseItemConfiguration : IEntityTypeConfiguration<PurchaseItem>
      .HasConstraintName("FK_Purchase_PurchaseID")
      .OnDelete(DeleteBehavior.NoAction);
 
-     builder.HasOne(p => p.Item)
-      .WithOne(i => i.PurchaseItem)
-      .HasForeignKey<PurchaseItem>(p => p.PartnerCtID)
-      .HasConstraintName("FK_Item_ItemID")
-      .OnDelete(DeleteBehavior.NoAction);
+ 
+
+            builder.HasOne(p => p.Item)
+    .WithMany(i => i.PurchaseItems) 
+    .HasForeignKey(p => p.PartnerCtID)
+     .HasConstraintName("FK_Item_ItemID")
+    .OnDelete(DeleteBehavior.NoAction);
         }
     }
 }

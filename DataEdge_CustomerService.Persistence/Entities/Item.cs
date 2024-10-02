@@ -16,6 +16,6 @@ namespace DataEdge_CustomerService.Persistence.Entities
         public float NetPrice { get; set; }
         public int Version { get; set; }
         public int PartnerId { get; set; }
-        public PurchaseItem PurchaseItem { get; set; }
+        public ICollection<PurchaseItem> PurchaseItems { get; set; }
     }
 }

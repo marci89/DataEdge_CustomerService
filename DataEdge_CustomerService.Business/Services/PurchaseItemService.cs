@@ -103,7 +103,7 @@ namespace DataEdge_CustomerService.Business.Services
 
 
 
-                if (request.PartnerID.HasValue && request.Id.Value != 0)
+                if (request.PartnerID.HasValue && request.PartnerID.Value != 0)
                 {
                     query = query.Where(x => x.PartnerID.ToString().Contains(request.PartnerID.Value.ToString()));
                 }

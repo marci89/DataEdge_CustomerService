@@ -48,10 +48,7 @@ namespace DataEdge_CustomerService.Persistence.Configurations
                 .IsRequired();
 
 
-            builder.HasOne(i => i.PurchaseItem)
-                .WithOne(p => p.Item)
-                .HasForeignKey<PurchaseItem>(p => p.PartnerCtID)
-                .OnDelete(DeleteBehavior.NoAction);
+          
         }
     }
 }
