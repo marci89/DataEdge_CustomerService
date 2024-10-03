@@ -9,8 +9,6 @@ using System.Threading.Tasks;
 
 namespace DataEdge_CustomerService.Persistence.Configurations
 {
-
-
     public class ItemConfiguration : IEntityTypeConfiguration<Item>
     {
         public void Configure(EntityTypeBuilder<Item> builder)
@@ -46,9 +44,6 @@ namespace DataEdge_CustomerService.Persistence.Configurations
 
             builder.Property(i => i.PartnerId)
                 .IsRequired();
-
-
-          
         }
     }
 }

@@ -107,11 +107,9 @@ namespace DataEdge_CustomerService.Business.Services
             var purchases = new List<Purchase>();
             var existingIds = new HashSet<int>();
 
-
             for (int row = 2; row <= sheet.Dimension.End.Row; row++)
             {
                 var id = int.Parse(sheet.Cells[row, 1].Text);
-
 
                 if (!existingIds.Contains(id))
                 {
@@ -143,7 +141,6 @@ namespace DataEdge_CustomerService.Business.Services
                 var id = int.Parse(sheet.Cells[row, 1].Text);
                 if (!NonexistingPurchaseIds.Contains(id))
                 {
-
                     var item = new Item
                     {
                         Id = int.Parse(sheet.Cells[row, 1].Text),
@@ -164,7 +161,6 @@ namespace DataEdge_CustomerService.Business.Services
                         item.NetPrice = 0.0f;
                     }
 
-
                     items.Add(item);
                 }
             }
@@ -179,13 +175,9 @@ namespace DataEdge_CustomerService.Business.Services
             for (int row = 2; row <= sheet.Dimension.End.Row; row++)
             {
                 var id = int.Parse(sheet.Cells[row, 1].Text);
-              //  var isParentExists = purchases.Select(x => (x.Id == int.Parse(sheet.Cells[row, 3].Text))).Any();
               
-
-
                 if (!existingIds.Contains(id))
                 {
-
                     var purchaseItem = new PurchaseItem
                     {
                         Id = int.Parse(sheet.Cells[row, 1].Text),
@@ -211,8 +203,6 @@ namespace DataEdge_CustomerService.Business.Services
                     {
                         purchaseItem.Gross = 0.0f;
                     }
-
-
 
                     purchaseItems.Add(purchaseItem);
                    existingIds.Add(id);

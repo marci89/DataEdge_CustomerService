@@ -12,9 +12,6 @@ namespace DataEdge_CustomerService.Business.Models
 
         private string _errorMessage;
 
-        /// <summary>
-        /// Returning error message
-        /// </summary>
         public virtual string ErrorMessage
         {
             get

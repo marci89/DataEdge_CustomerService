@@ -65,8 +65,6 @@ if (app.Environment.IsDevelopment())
         db.Database.Migrate();
     }
 
-
-
 #endregion
 
 app.UseCors(builder => builder.AllowAnyHeader().AllowAnyMethod().WithOrigins("*"));

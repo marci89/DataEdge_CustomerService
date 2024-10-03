@@ -14,6 +14,9 @@ namespace DataEdgeCustomerService.API.Controllers
             _dataBaseImportService = dataBaseImportService;
         }
 
+        /// <summary>
+        /// Import database's data from excel
+        /// </summary>
         [HttpGet("Import")]
         public async Task<IActionResult> Import()
         {

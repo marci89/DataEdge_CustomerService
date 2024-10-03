@@ -9,12 +9,8 @@ using DataEdge_CustomerService.Persistence.Entities;
 
 namespace DataEdge_CustomerService.Persistence.Configurations
 {
-
     public class PurchaseConfiguration : IEntityTypeConfiguration<Purchase>
     {
-        /// <summary>
-        /// Word datatable configuration
-        /// </summary>
         public void Configure(EntityTypeBuilder<Purchase> builder)
         {
             builder.ToTable("Purchase");

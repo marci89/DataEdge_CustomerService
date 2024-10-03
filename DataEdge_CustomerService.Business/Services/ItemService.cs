@@ -286,8 +286,6 @@ namespace DataEdge_CustomerService.Business.Services
                 response.ErrorMessage = ex.Message;
                 return response;
             }
-
         }
-
     }
 }

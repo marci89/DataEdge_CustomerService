@@ -57,8 +57,6 @@ namespace DataEdge_CustomerService.Business.Services
                         }
                     };
                 }
-
-
             }
             catch (Exception ex)
             {
@@ -74,8 +72,6 @@ namespace DataEdge_CustomerService.Business.Services
         /// </summary>
         public async Task<ListPurchaseItemResponse> List(ListPurchaseItemRequest request)
         {
-
-
             try
             {
                 IQueryable<PurchaseItem> query = _dbContext.PurchaseItems.Include(p => p.Item);
@@ -100,8 +96,6 @@ namespace DataEdge_CustomerService.Business.Services
                 {
                     query = query.Where(x => x.Gross.ToString().Contains(request.Gross.Value.ToString()));
                 }
-
-
 
                 if (request.PartnerID.HasValue && request.PartnerID.Value != 0)
                 {
@@ -130,7 +124,6 @@ namespace DataEdge_CustomerService.Business.Services
                     ErrorMessage = ex.Message
                 };
             }
-
         }
 
         /// <summary>
@@ -247,8 +240,6 @@ namespace DataEdge_CustomerService.Business.Services
                 response.ErrorMessage = ex.Message;
                 return response;
             }
-
         }
-
     }
 }

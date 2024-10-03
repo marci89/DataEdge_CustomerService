@@ -25,7 +25,6 @@ namespace DataEdge_CustomerService.Business.Services
             _dbContext = dbContext;
         }
 
-
         /// <summary>
         /// Read by id
         /// </summary>
@@ -47,9 +46,7 @@ namespace DataEdge_CustomerService.Business.Services
                     {
                         Result = new ShopModel { Id = entity.Id, Name = entity.Name, PartnerId = entity.PartnerID }
                     };
-                }
-
-             
+                }     
             }
             catch (Exception ex)
             {
@@ -99,7 +96,6 @@ namespace DataEdge_CustomerService.Business.Services
                     ErrorMessage = ex.Message
                 };
             }
-
         }
 
         /// <summary>
@@ -177,8 +173,6 @@ namespace DataEdge_CustomerService.Business.Services
                 response.ErrorMessage = ex.Message;
                 return response;
             }
-
         }
-
     }
 }

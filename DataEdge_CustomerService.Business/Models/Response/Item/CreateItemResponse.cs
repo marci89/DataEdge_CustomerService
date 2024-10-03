@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 
 namespace DataEdge_CustomerService.Business.Models.Response.Item
 {
-
     public class CreateItemResponse : ResponseBase
     {
         public ItemModel Result { get; set; }
